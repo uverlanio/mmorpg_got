@@ -21,19 +21,14 @@ JogoDAO.prototype.gerarParametros = function(usuario){
 
 }
 
-JogoDAO.prototype.iniciaJogo = function(usuario){
+JogoDAO.prototype.iniciaJogo = function(res, usuario, casa){
 	this._connection.open(function(err, mongoclient){
 		mongoclient.collection("jogo", function(err, collection){
 			collection.find({usuario : usuario}).toArray(function(err, result){
-				
-				console.log('usuario : ' + result);
-
-			//res.render('jogo', {img_casa: casa});
-
-			
-
-		mongoclient.close();
+				res.render('jogo', {jogo: result[0] , img_casa : casa});			
 			});
+		mongoclient.close();
+			
 		});
 	});
 }
