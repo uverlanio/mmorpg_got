@@ -19,6 +19,29 @@
 				$('#btn_sair').click(function(){
 					window.location.href = '/sair';
 				});
+
+				$('#btn_aldeoes').click(function(){
+					$('#msg_erro').hide();
+					$.ajax({
+						url: '/suditos',
+						method: 'get',	
+						success: function(data) {
+							$('#acoes').html(data);
+						}
+				});
+					});
+
+				$('#btn_pergaminhos').click(function(){
+					$('#msg_erro').hide();
+					$.ajax({
+						url: '/pergaminhos',
+						method: 'get',	
+						success: function(data) {
+							$('#acoes').html(data);
+						}
+					});
+				});
+
 			});
 
 		</script>
@@ -26,17 +49,20 @@
 	</head>
 
 	<body class="body-jogo">
-
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">
-				<div class="form-group sair">
+			<div class="form-group sair">
 					<button type="button" class="btn btn-info pull-right" id="btn_sair">Sair</button>
 				</div>
 			</div>
 		</nav>
 
 	    <div class="container">
-	    	
+	    		<% if(comando_invalido == 'S') { %>
+					<div class="alert alert-danger" id="msg_erro">
+						<strong>Operação inválida, verifique se todos os campos!</strong>
+					</div>
+				<% } %>	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
 					<img src="images/casa_<%=img_casa%>.jpg" />
@@ -70,7 +96,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
-					<div class="acoes"></div>					
+					<div class="acoes" id="acoes">Senhor, o que deseja fazer hoje?</div>					
 				</div>
 			</div>
 			
@@ -81,11 +107,12 @@
 			
 				<div class="row">
 					<div class="col-sm-1">
-						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões"/>
+						<img src="images/outros/suditos.jpg" title="Aldeões" id="btn_aldeoes" alt="Aldeões"/>
+						<span><%=jogo.suditos%></span>
 					</div>
 					
 					<div class="col-sm-1">
-						<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos"/>
+						<img src="images/outros/pergaminho.jpg" title="Pergaminhos" id="btn_pergaminhos" alt="Pergaminhos"/>
 					</div>
 					
 					<div class="col-sm-8"></div>
