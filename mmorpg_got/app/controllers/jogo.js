@@ -43,7 +43,6 @@ module.exports.pergaminhos = function(application, req, res){
 		res.send('Usuário precisa fazer login');
 		return;
 	}
-		//res.render('pergaminhos', {validacao : {}})
 		var connection = application.config.dbConnection;
 		var JogoDAO = new application.app.models.JogoDAO(connection);
 
